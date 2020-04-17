@@ -157,7 +157,8 @@ client.on("message", msg => {
         }
         // Rules
         if (!msg.author.bot && msg.guild.id == config.channels.guild) {
-            if (!config.channels.ignore.includes(msg.channel.id) && !msg.author.roles.cache.some(role => role.id === config.roles.immuneRole)) {
+            let member = msg.mentions.members.first();
+            if (!config.channels.ignore.includes(msg.channel.id) && !member.roles.cache.some(role => role.id === config.roles.immuneRole)) {
                 if (msg.content.match(/(https?:\/\/)?(www\.)?(discord\.(gg|io|me|li)|discordapp\.com\/invite)\/.+[a-z]/gm)) {
                     if (config.automation.discordInvites.deleteMessage) {
                         msg.delete();
