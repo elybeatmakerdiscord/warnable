@@ -178,6 +178,105 @@ client.on("message", msg => {
                 }
             }
         }
+        if (msg.guild.id == "191263668305002496") {
+            if (["671119227234549770", "554566075333869579"].includes(msg.channel.id)) {
+                if (msg.content.toLowerCase().startsWith("-color") || msg.content.toLowerCase().startsWith("-colour")) {
+                    if (msg.member.roles.get("643525988864491530")) {
+                        var colorString = msg.content.toLowerCase().split(" ")[1];
+                        if (!isNaN(colorString)) {
+                            var colorNum = parseInt(colorString);
+                            var roleArray = ["671129212404498462", "671129257367437331", "671129282927657002", "671129308969959440", "671129334055960577", "671360949894119464", "671361106131943426", "671361142374924298", "671361170384617514", "671361196057952276"];
+                            if (colorNum == 0) {
+                                msg.member.removeRoles(roleArray)
+                                .then(function() {
+                                    msg.reply("Done! You now have no colour role!").then(m => { msg.delete(); setTimeout(function() { m.delete() }, 10000); });
+                                })
+                                .catch(function(err) {
+                                    console.log(err);
+                                    msg.reply("There was a problem! Please report this to one of our moderators...").then(m => { msg.delete(); setTimeout(function() { m.delete() }, 10000); });
+                                });
+                            }
+                            else if (colorNum >= 1 && colorNum <= 10) {
+                                var addRole = roleArray.splice((colorNum - 1), 1);
+                                msg.member.removeRoles(roleArray)
+                                .then(function() {
+                                    msg.member.addRole(addRole[0])
+                                    .then(function() {
+                                        msg.reply("Done! You now have your new color!").then(m => { msg.delete(); setTimeout(function() { m.delete() }, 10000); });
+                                    })
+                                    .catch(function(err) {
+                                        console.log(err);
+                                        msg.reply("There was a problem! Please report this to one of our moderators...").then(m => { msg.delete(); setTimeout(function() { m.delete() }, 10000); });
+                                    });
+                                })
+                                .catch(function(err) {
+                                    console.log(err);
+                                    msg.reply("There was a problem! Please report this to one of our moderators...").then(m => { msg.delete(); setTimeout(function() { m.delete() }, 10000); });
+                                });
+                            }
+                            else {
+                                msg.reply("The number can only be from 1 to 10");
+                            }
+                        }
+                        else {
+                            msg.reply("That isn't a number. Please check the message above on information about the commands.").then(m => { msg.delete(); setTimeout(function() { m.delete() }, 10000); });
+                        }
+                    }
+                    else {
+                        msg.reply("Only people with the Astronauts role and above are able to use this command.").then(m => { msg.delete(); setTimeout(function() { m.delete() }, 10000); });
+                    }
+                }
+                else if (msg.content.toLowerCase().startsWith("-notify")) {
+                    if (msg.member.roles.get("672139777201405952")) {
+                        msg.member.removeRole("672139777201405952")
+                        .then(function() {
+                            msg.reply("Done! You will **no longer** be notified for future uploads.").then(m => { msg.delete(); setTimeout(function() { m.delete() }, 10000); });
+                        })
+                        .catch(function(err) {
+                            console.log(err);
+                            msg.reply("There was a problem! Please report this to one of our moderators...").then(m => { msg.delete(); setTimeout(function() { m.delete() }, 10000); });
+                        });
+                    }
+                    else {
+                        msg.member.addRole("672139777201405952")
+                        .then(function() {
+                            msg.reply("Done! You will **now** be notified for future uploads.").then(m => { msg.delete(); setTimeout(function() { m.delete() }, 10000); });
+                        })
+                        .catch(function(err) {
+                            console.log(err);
+                            msg.reply("There was a problem! Please report this to one of our moderators...").then(m => { msg.delete(); setTimeout(function() { m.delete() }, 10000); });
+                        });
+
+                    }
+                }
+                else if (msg.channel.id == "671119227234549770") {
+                    if (msg.member.roles.get("196368525382647808") || msg.author.id == "409166189974257714") {
+                        var x = "2";
+                    }
+                    else {
+                        msg.delete()
+                    }
+                }
+            }
+            if (msg.content.toLowerCase() == "smelly") {
+                msg.channel.send("Sm**Ely**!");
+            }
+            else if (msg.content.toLowerCase() == "aary") {
+                msg.channel.send("<a:YeetAary:664279299255435267>");
+            }
+            else if (msg.content.toLowerCase() == "rex") {
+                msg.channel.send("**RAWR!**");
+            }
+            if (msg.content.match(/bit\.ly\/.+/g)) {
+                if (config.admins.users.includes(msg.author.id) || msg.guild.members.get(msg.author.id).roles.array().some(r => config.admins.roles.indexOf(r.id) >= 0) || msg.guild.members.get(msg.author.id).roles.get(config.roles.immuneRole)) {
+                    console.log("b")
+                }
+                else {
+                    msg.delete();
+                    msg.reply("For security reasons, we don't allow bit.ly links to be posted. Sorry!");
+                }
+            }
+        }
     }
 });
 
