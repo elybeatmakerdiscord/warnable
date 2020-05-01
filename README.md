@@ -1,4 +1,7 @@
 # Warnable
+
+Note that this fork contains features specifically for Elybeatmaker's server and has some hardcoded IDs
+
 [![Build Status](https://travis-ci.org/zacimac/warnable.svg?branch=master)](https://travis-ci.org/zacimac/warnable)
 [![star this repo](https://githubbadges.com/star.svg?user=zacimac&repo=warnable&style=flat)](https://github.com/zacimac/warnable)
 [![fork this repo](https://githubbadges.com/fork.svg?user=zacimac&repo=warnable&style=flat)](https://github.com/zacimac/warnable/fork)
