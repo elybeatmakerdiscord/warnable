@@ -182,7 +182,7 @@ client.on("message", msg => {
         if (msg.guild.id == "191263668305002496") {
             if (["671119227234549770", "554566075333869579"].includes(msg.channel.id)) {
                 if (msg.content.toLowerCase().startsWith("-color") || msg.content.toLowerCase().startsWith("-colour")) {
-                    if (msg.member.roles.get("643525988864491530")) {
+                    if (msg.member.roles.get("643525988864491530") || msg.member.roles.get("592181388879462401")) {
                         var colorString = msg.content.toLowerCase().split(" ")[1];
                         if (!isNaN(colorString)) {
                             var colorNum = parseInt(colorString);
