@@ -250,6 +250,28 @@ client.on("message", msg => {
 
                     }
                 }
+                else if (msg.content.toLowerCase().startsWith("-trivia")) {
+                    if (msg.member.roles.get("717299622959382598")) {
+                        msg.member.removeRole("717299622959382598")
+                        .then(function() {
+                            msg.reply("Done! You will **no longer** be notified about trivia.").then(m => { msg.delete(); setTimeout(function() { m.delete() }, 10000); });
+                        })
+                        .catch(function(err) {
+                            console.log(err);
+                            msg.reply("There was a problem! Please report this to one of our moderators...").then(m => { msg.delete(); setTimeout(function() { m.delete() }, 10000); });
+                        });
+                    }
+                    else {
+                        msg.member.addRole("717299622959382598")
+                        .then(function() {
+                            msg.reply("Done! You will **now** be notified for future trivias.").then(m => { msg.delete(); setTimeout(function() { m.delete() }, 10000); });
+                        })
+                        .catch(function(err) {
+                            console.log(err);
+                            msg.reply("There was a problem! Please report this to one of our moderators...").then(m => { msg.delete(); setTimeout(function() { m.delete() }, 10000); });
+                        });
+                    }
+                }
                 else if (msg.channel.id == "671119227234549770") {
                     if (msg.member.roles.get("196368525382647808") || msg.author.id == "409166189974257714") {
                         var x = "2";
