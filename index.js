@@ -143,7 +143,7 @@ const commands = {
     }
 };
 
-client.on("message", msg => {
+client.on("message", async msg => {
     if (msg.guild) {
         if (msg.content.startsWith(config.prefix)) {
             if (commands.hasOwnProperty(msg.content.toLowerCase().slice(config.prefix.length).split(' ')[0])) {
@@ -162,10 +162,12 @@ client.on("message", msg => {
                 if (msg.content.match(/(https?:\/\/)?(www\.)?(discord\.(gg|io|me|li)|discordapp\.com\/invite)\/.+[a-z]/gm)) {
                     if (config.automation.discordInvites.deleteMessage) {
                         msg.delete();
-                        msg.channel.send("", {embed: {
+                        let embedMsg = await msg.channel.send(`<@${msg.author.id}>`, {embed: {
                             color: 0x9b59b6,
-                            title: `${msg.author.username}, you are not allowed to send Discord invite links in this server.`
-                        }});
+                            title: `You are not allowed to send Discord invite links in this server. This violation of the rules has resulted in one official warning.`
+                        }})
+
+                        embedMsg.delete(20000)
                     } 
                     if (config.automation.discordInvites.giveWarning) warningAdd(msg.author.id, "Automatic: Discord Invite", client.user, msg.guild, function() {});
                 }
