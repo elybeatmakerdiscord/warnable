@@ -184,7 +184,7 @@ client.on("message", async msg => {
         if (msg.guild.id == "191263668305002496") {
             if (["671119227234549770", "554566075333869579"].includes(msg.channel.id)) {
                 if (msg.content.toLowerCase().startsWith("-color") || msg.content.toLowerCase().startsWith("-colour")) {
-                    if (msg.member.roles.get("643525988864491530")) {
+                    if (msg.member.roles.get("643525988864491530") || msg.member.roles.get("592181388879462401")) {
                         var colorString = msg.content.toLowerCase().split(" ")[1];
                         if (!isNaN(colorString)) {
                             var colorNum = parseInt(colorString);
@@ -250,6 +250,28 @@ client.on("message", async msg => {
                             msg.reply("There was a problem! Please report this to one of our moderators...").then(m => { msg.delete(); setTimeout(function() { m.delete() }, 10000); });
                         });
 
+                    }
+                }
+                else if (msg.content.toLowerCase().startsWith("-trivia")) {
+                    if (msg.member.roles.get("717299622959382598")) {
+                        msg.member.removeRole("717299622959382598")
+                        .then(function() {
+                            msg.reply("Done! You will **no longer** be notified about trivia.").then(m => { msg.delete(); setTimeout(function() { m.delete() }, 10000); });
+                        })
+                        .catch(function(err) {
+                            console.log(err);
+                            msg.reply("There was a problem! Please report this to one of our moderators...").then(m => { msg.delete(); setTimeout(function() { m.delete() }, 10000); });
+                        });
+                    }
+                    else {
+                        msg.member.addRole("717299622959382598")
+                        .then(function() {
+                            msg.reply("Done! You will **now** be notified for future trivias.").then(m => { msg.delete(); setTimeout(function() { m.delete() }, 10000); });
+                        })
+                        .catch(function(err) {
+                            console.log(err);
+                            msg.reply("There was a problem! Please report this to one of our moderators...").then(m => { msg.delete(); setTimeout(function() { m.delete() }, 10000); });
+                        });
                     }
                 }
                 else if (msg.channel.id == "671119227234549770") {
